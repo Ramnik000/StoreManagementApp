@@ -1,11 +1,17 @@
 from tkinter import*
 
-def show_food():
-    
+root=Tk()
+root.title('🏪 Store Application')
+root.geometry('1100x800')
+root.config(bg="#E9386D")
+headingLabel = Label(root, text="Store Management", font=("Arial", 24, 'bold'), bg="#FFC0CB", fg="Black")
+headingLabel.pack(pady=10,fill= X)
+
+def show_food():  
+    global foodItemEntry1, foodItemEntry2, foodItemEntry3
     foodLabel = Label(Contentlabel, text="Available Food: ", font=("Arial", 13))
     foodLabel.grid(row=0, column=0, pady=2, padx=10)
 
-   
     foodItem1 = Label(Contentlabel, text="Momos", bg="#FFC0CB", fg="Black")
     foodItem1.grid(row=1, column=0, pady=2, padx=10)
     foodItemEntry1 = Entry(Contentlabel, width=10, bd=5)
@@ -25,10 +31,9 @@ def show_food():
     foodItemEntry3.insert(0, "0")
 
 def show_beauty():
-  
+    global beautyItemEntry1, beautyItemEntry2, beautyItemEntry3
     beautyLabel = Label(Contentlabel, text="Available Beauty and Cosmetics: ", font=("Arial", 13))
     beautyLabel.grid(row=0, column=2, pady=2, padx=10)
-
     
     beautyItem1 = Label(Contentlabel, text="Shampoo", bg="#FFC0CB", fg="Black")
     beautyItem1.grid(row=1, column=2, pady=2, padx=10)
@@ -49,7 +54,7 @@ def show_beauty():
     beautyItemEntry3.insert(0, "0")
 
 def show_fashion():
-        
+    global fashionItemEntry1, fashionItemEntry2 , fashionItemEntry3 
     fashionLabel = Label(Contentlabel, text="Available Fashion: ", font=("Arial", 13))
     fashionLabel.grid(row=0, column=4, pady=2, padx=10)
 
@@ -72,6 +77,7 @@ def show_fashion():
     fashionItemEntry3.insert(0, "0")
 
 def show_grocery():
+    global groceryItemEntry1, groceryItemEntry2, groceryItemEntry3
     groceryLabel = Label(Contentlabel, text="Available Grocery: ", font=("Arial", 13))
     groceryLabel.grid(row=0, column=6, pady=2, padx=10)
 
@@ -93,13 +99,44 @@ def show_grocery():
     groceryItemEntry3.grid(row=3, column=7, pady=2, padx=10)
     groceryItemEntry3.insert(0, "0")
 
+def total():
+    #Food Calculation
+    foodItemPrice1 = int(foodItemEntry1.get())*12
+    foodItemPrice2 = int(foodItemEntry2.get())*16
+    foodItemPrice3 = int(foodItemEntry3.get())*28
 
-root=Tk()
-root.title('🏪 Store Application')
-root.geometry('1100x800')
-root.config(bg="#E9386D")
-headingLabel = Label(root, text="Store Management", font=("Arial", 24, 'bold'), bg="#FFC0CB", fg="Black")
-headingLabel.pack(pady=10,fill= X)
+    total_food_price = foodItemPrice1 + foodItemPrice2 + foodItemPrice3
+    foodTotalEntry.insert(0, f"${total_food_price}")
+
+    #Beauty Calculation
+    beautyItemPrice1 = int(beautyItemEntry1.get())*21
+    beautyItemPrice2 = int(beautyItemEntry2.get())*39
+    beautyItemPrice3 = int(beautyItemEntry3.get())*13
+
+    total_beauty_price = beautyItemPrice1 + beautyItemPrice2 + beautyItemPrice3
+    beautyTotalEntry.insert(0, f"${total_beauty_price}")
+
+    #Fashion Calculation
+    fashionItemPrice1 = int(fashionItemEntry1.get())*28
+    fashionItemPrice2 = int(fashionItemEntry2.get())*45
+    fashionItemPrice3 = int(fashionItemEntry3.get())*73
+
+    total_fashion_price = fashionItemPrice1 + fashionItemPrice2 + fashionItemPrice3
+    fashionTotalEntry.insert(0, f"${total_fashion_price}")
+
+    #Grocery Calculation
+    groceryItemPrice1 = int(groceryItemEntry1.get())*2
+    groceryItemPrice2 = int(groceryItemEntry2.get())*4
+    groceryItemPrice3 = int(groceryItemEntry3.get())*3
+
+    total_grocery_price = groceryItemPrice1 + groceryItemPrice2 + groceryItemPrice3
+    groceryTotalEntry.insert(0, f"${total_grocery_price}")
+
+    grand_total = total_food_price + total_beauty_price + total_fashion_price + total_grocery_price
+    tax = grand_total * 0.13  
+    total_with_tax = grand_total + tax
+    totalBillEntry.insert(0, f"${total_with_tax:.2f}")
+
 
 
 CustomerLabel = LabelFrame(root, text="Customer Details", font=("Arial", 15, 'bold'), bg="#FFC0CB", fg="Black")
@@ -142,19 +179,6 @@ groceryButton.grid(row=1,column=3, pady=5,padx=10)
 
 Contentlabel = LabelFrame(root,bg="#FFC0CB", fg="Black")
 Contentlabel.pack(pady=10, fill=BOTH)
-
-
-prices = {
-    "Momos": 5.00,
-    "Pizza": 8.00,
-    "Burger": 7.00,
-    "Shampoo": 15.00,
-    "Lipstick": 20.00,
-    "Nail Polish": 12.00,
-    "Shoes": 40.00,
-    "Hoodies": 25.00,
-    "Coat": 60.00
-}
 
 FinalBillLabel = LabelFrame(root, text="Total", font=("Arial", 15, 'bold'), bg="#FFC0CB", fg="Black")
 FinalBillLabel.pack(fill=BOTH)
@@ -200,18 +224,16 @@ scrollbar.config(command=billText.yview)
 buttonFrame2 = Frame(root, bg="#FFC0CB", bd=8, relief=GROOVE)
 buttonFrame2.pack(side="top", pady=10, fill=X, padx=10)
 
-totalButton = Button(buttonFrame2, text="Total", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2)
+totalButton = Button(buttonFrame2, text="Total", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=total)
 totalButton.grid(row=0, column=0, pady=5, padx=10)
 
-billButton = Button(buttonFrame2, text="Bill", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2)
+billButton = Button(buttonFrame2, text="Bill", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=total)
 billButton.grid(row=0, column=1, pady=5, padx=10)
 
-emailButton = Button(buttonFrame2, text="Email", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2)
+emailButton = Button(buttonFrame2, text="Email", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=total)
 emailButton.grid(row=0, column=2, pady=5, padx=10)
 
-printButton = Button(buttonFrame2, text="Print", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2)
+printButton = Button(buttonFrame2, text="Print", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=total)
 printButton.grid(row=0, column=3, pady=5, padx=10)
-
-
 
 root.mainloop()
