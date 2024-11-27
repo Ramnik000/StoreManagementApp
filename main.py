@@ -100,43 +100,46 @@ def show_grocery():
     groceryItemEntry3.insert(0, "0")
 
 def total():
-    #Food Calculation
-    foodItemPrice1 = int(foodItemEntry1.get())*12
-    foodItemPrice2 = int(foodItemEntry2.get())*16
-    foodItemPrice3 = int(foodItemEntry3.get())*28
-
+    # Food Calculation
+    foodItemPrice1 = int(foodItemEntry1.get()) * 12
+    foodItemPrice2 = int(foodItemEntry2.get()) * 16
+    foodItemPrice3 = int(foodItemEntry3.get()) * 28
     total_food_price = foodItemPrice1 + foodItemPrice2 + foodItemPrice3
+    foodTotalEntry.delete(0, END)
     foodTotalEntry.insert(0, f"${total_food_price}")
 
-    #Beauty Calculation
-    beautyItemPrice1 = int(beautyItemEntry1.get())*21
-    beautyItemPrice2 = int(beautyItemEntry2.get())*39
-    beautyItemPrice3 = int(beautyItemEntry3.get())*13
-
+    # Beauty Calculation
+    beautyItemPrice1 = int(beautyItemEntry1.get()) * 21
+    beautyItemPrice2 = int(beautyItemEntry2.get()) * 39
+    beautyItemPrice3 = int(beautyItemEntry3.get()) * 13
     total_beauty_price = beautyItemPrice1 + beautyItemPrice2 + beautyItemPrice3
+    beautyTotalEntry.delete(0, END)
     beautyTotalEntry.insert(0, f"${total_beauty_price}")
 
-    #Fashion Calculation
-    fashionItemPrice1 = int(fashionItemEntry1.get())*28
-    fashionItemPrice2 = int(fashionItemEntry2.get())*45
-    fashionItemPrice3 = int(fashionItemEntry3.get())*73
-
+    # Fashion Calculation
+    fashionItemPrice1 = int(fashionItemEntry1.get()) * 28
+    fashionItemPrice2 = int(fashionItemEntry2.get()) * 45
+    fashionItemPrice3 = int(fashionItemEntry3.get()) * 73
     total_fashion_price = fashionItemPrice1 + fashionItemPrice2 + fashionItemPrice3
+    fashionTotalEntry.delete(0, END)
     fashionTotalEntry.insert(0, f"${total_fashion_price}")
 
-    #Grocery Calculation
-    groceryItemPrice1 = int(groceryItemEntry1.get())*2
-    groceryItemPrice2 = int(groceryItemEntry2.get())*4
-    groceryItemPrice3 = int(groceryItemEntry3.get())*3
-
+    # Grocery Calculation
+    groceryItemPrice1 = int(groceryItemEntry1.get()) * 2
+    groceryItemPrice2 = int(groceryItemEntry2.get()) * 4
+    groceryItemPrice3 = int(groceryItemEntry3.get()) * 3
     total_grocery_price = groceryItemPrice1 + groceryItemPrice2 + groceryItemPrice3
+    groceryTotalEntry.delete(0, END)
     groceryTotalEntry.insert(0, f"${total_grocery_price}")
 
+    
     grand_total = total_food_price + total_beauty_price + total_fashion_price + total_grocery_price
-    tax = grand_total * 0.13  
+    tax = grand_total * 0.13 
     total_with_tax = grand_total + tax
-    totalBillEntry.insert(0, f"${total_with_tax:.2f}")
 
+    # Display the total with tax in the totalBillEntry
+    totalBillEntry.delete(0, END)
+    totalBillEntry.insert(0, f"${total_with_tax:.2f}")
 
 
 CustomerLabel = LabelFrame(root, text="Customer Details", font=("Arial", 15, 'bold'), bg="#FFC0CB", fg="Black")
