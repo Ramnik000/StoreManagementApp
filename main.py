@@ -197,5 +197,21 @@ billText = Text(billFrame, font=("Arial", 13), yscrollcommand=scrollbar.set, wra
 billText.pack(fill=Y, expand=True)
 scrollbar.config(command=billText.yview)
 
+buttonFrame2 = Frame(root, bg="#FFC0CB", bd=8, relief=GROOVE)
+buttonFrame2.pack(side="top", pady=10, fill=X, padx=10)
+
+totalButton = Button(buttonFrame2, text="Total", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2)
+totalButton.grid(row=0, column=0, pady=5, padx=10)
+
+billButton = Button(buttonFrame2, text="Bill", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2)
+billButton.grid(row=0, column=1, pady=5, padx=10)
+
+emailButton = Button(buttonFrame2, text="Email", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2)
+emailButton.grid(row=0, column=2, pady=5, padx=10)
+
+printButton = Button(buttonFrame2, text="Print", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2)
+printButton.grid(row=0, column=3, pady=5, padx=10)
+
+
 
 root.mainloop()
