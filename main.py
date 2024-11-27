@@ -1,4 +1,8 @@
 from tkinter import*
+from tkinter import messagebox
+import random
+
+billNum = random.randint(500, 1000)
 
 root=Tk()
 root.title('🏪 Store Application')
@@ -105,7 +109,7 @@ def total():
     foodItemPrice2 = int(foodItemEntry2.get()) * 16
     foodItemPrice3 = int(foodItemEntry3.get()) * 28
     total_food_price = foodItemPrice1 + foodItemPrice2 + foodItemPrice3
-    foodTotalEntry.delete(0, END)
+    
     foodTotalEntry.insert(0, f"${total_food_price}")
 
     # Beauty Calculation
@@ -113,7 +117,7 @@ def total():
     beautyItemPrice2 = int(beautyItemEntry2.get()) * 39
     beautyItemPrice3 = int(beautyItemEntry3.get()) * 13
     total_beauty_price = beautyItemPrice1 + beautyItemPrice2 + beautyItemPrice3
-    beautyTotalEntry.delete(0, END)
+    
     beautyTotalEntry.insert(0, f"${total_beauty_price}")
 
     # Fashion Calculation
@@ -121,7 +125,7 @@ def total():
     fashionItemPrice2 = int(fashionItemEntry2.get()) * 45
     fashionItemPrice3 = int(fashionItemEntry3.get()) * 73
     total_fashion_price = fashionItemPrice1 + fashionItemPrice2 + fashionItemPrice3
-    fashionTotalEntry.delete(0, END)
+    
     fashionTotalEntry.insert(0, f"${total_fashion_price}")
 
     # Grocery Calculation
@@ -129,7 +133,7 @@ def total():
     groceryItemPrice2 = int(groceryItemEntry2.get()) * 4
     groceryItemPrice3 = int(groceryItemEntry3.get()) * 3
     total_grocery_price = groceryItemPrice1 + groceryItemPrice2 + groceryItemPrice3
-    groceryTotalEntry.delete(0, END)
+    
     groceryTotalEntry.insert(0, f"${total_grocery_price}")
 
     
@@ -140,6 +144,23 @@ def total():
     # Display the total with tax in the totalBillEntry
     totalBillEntry.delete(0, END)
     totalBillEntry.insert(0, f"${total_with_tax:.2f}")
+
+def bill():
+    if customerNameEntry.get() == "" or customerLoyalyCardEntry.get() == "":
+        messagebox.showerror('Error',"Customer Details Required")
+
+   # elif Contentlabel.cget("text") == "":
+    #    messagebox.showerror('Error',"No Products Selected")
+    
+    else:
+        billText.insert(END, f"---***---***---  ---***---***---***  Welcome Customers  ---***---***---  ---***---***---***  \n")
+        billText.insert(END, f" Bill Number : {billNum} \n")
+        billText.insert(END, f" Customer Name : {customerNameEntry.get()} \n")
+        billText.insert(END, f" Loyalty Card : {customerLoyalyCardEntry.get()} \n")
+        billText.insert(END, "============================================================= \n")
+        billText.insert(END, " Products\t\t\t QTY \t\t\t Price ")
+
+    
 
 
 CustomerLabel = LabelFrame(root, text="Customer Details", font=("Arial", 15, 'bold'), bg="#FFC0CB", fg="Black")
@@ -230,7 +251,7 @@ buttonFrame2.pack(side="top", pady=10, fill=X, padx=10)
 totalButton = Button(buttonFrame2, text="Total", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=total)
 totalButton.grid(row=0, column=0, pady=5, padx=10)
 
-billButton = Button(buttonFrame2, text="Bill", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=total)
+billButton = Button(buttonFrame2, text="Bill", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=bill)
 billButton.grid(row=0, column=1, pady=5, padx=10)
 
 emailButton = Button(buttonFrame2, text="Email", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=total)
@@ -238,5 +259,8 @@ emailButton.grid(row=0, column=2, pady=5, padx=10)
 
 printButton = Button(buttonFrame2, text="Print", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=total)
 printButton.grid(row=0, column=3, pady=5, padx=10)
+
+clearButton = Button(buttonFrame2, text="Clear", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=total)
+clearButton.grid(row=0, column=3, pady=5, padx=10)
 
 root.mainloop()
