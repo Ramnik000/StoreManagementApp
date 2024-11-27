@@ -105,6 +105,7 @@ def show_grocery():
 
 def total():
     # Food Calculation
+    global foodItemPrice1, foodItemPrice2, foodItemPrice3
     foodItemPrice1 = int(foodItemEntry1.get()) * 12
     foodItemPrice2 = int(foodItemEntry2.get()) * 16
     foodItemPrice3 = int(foodItemEntry3.get()) * 28
@@ -113,6 +114,7 @@ def total():
     foodTotalEntry.insert(0, f"${total_food_price}")
 
     # Beauty Calculation
+    global beautyItemPrice1, beautyItemPrice2, beautyItemPrice3
     beautyItemPrice1 = int(beautyItemEntry1.get()) * 21
     beautyItemPrice2 = int(beautyItemEntry2.get()) * 39
     beautyItemPrice3 = int(beautyItemEntry3.get()) * 13
@@ -121,6 +123,7 @@ def total():
     beautyTotalEntry.insert(0, f"${total_beauty_price}")
 
     # Fashion Calculation
+    global fashionItemPrice1, fashionItemPrice2, fashionItemPrice3
     fashionItemPrice1 = int(fashionItemEntry1.get()) * 28
     fashionItemPrice2 = int(fashionItemEntry2.get()) * 45
     fashionItemPrice3 = int(fashionItemEntry3.get()) * 73
@@ -129,6 +132,7 @@ def total():
     fashionTotalEntry.insert(0, f"${total_fashion_price}")
 
     # Grocery Calculation
+    global groceryItemPrice1, groceryItemPrice2, groceryItemPrice3
     groceryItemPrice1 = int(groceryItemEntry1.get()) * 2
     groceryItemPrice2 = int(groceryItemEntry2.get()) * 4
     groceryItemPrice3 = int(groceryItemEntry3.get()) * 3
@@ -139,6 +143,7 @@ def total():
     
     grand_total = total_food_price + total_beauty_price + total_fashion_price + total_grocery_price
     tax = grand_total * 0.13 
+    global total_with_tax
     total_with_tax = grand_total + tax
 
     # Display the total with tax in the totalBillEntry
@@ -147,20 +152,74 @@ def total():
 
 def bill():
     if customerNameEntry.get() == "" or customerLoyalyCardEntry.get() == "":
-        messagebox.showerror('Error',"Customer Details Required")
-
-   # elif Contentlabel.cget("text") == "":
-    #    messagebox.showerror('Error',"No Products Selected")
-    
+        messagebox.showerror('Error', "Customer Details Required")
     else:
         billText.insert(END, f"---***---***---  ---***---***---***  Welcome Customers  ---***---***---  ---***---***---***  \n")
         billText.insert(END, f" Bill Number : {billNum} \n")
         billText.insert(END, f" Customer Name : {customerNameEntry.get()} \n")
         billText.insert(END, f" Loyalty Card : {customerLoyalyCardEntry.get()} \n")
         billText.insert(END, "============================================================= \n")
-        billText.insert(END, " Products\t\t\t QTY \t\t\t Price ")
+        billText.insert(END, " Products\t\t\t QTY \t\t\t Price \n")
 
-    
+        items_added = False  
+        
+        
+        def get_quantity(entry):
+            value = entry.get().strip()
+            return int(value) if value.isdigit() else 0
+
+        # Food items
+        if get_quantity(foodItemEntry1) > 0:
+            items_added = True
+            billText.insert(END, f"Momos \t\t\t{get_quantity(foodItemEntry1)}\t\t\t ${foodItemPrice1} \n")
+        if get_quantity(foodItemEntry2) > 0:
+            items_added = True
+            billText.insert(END, f"Pizza \t\t\t{get_quantity(foodItemEntry2)}\t\t\t ${foodItemPrice2} \n")
+        if get_quantity(foodItemEntry3) > 0:
+            items_added = True
+            billText.insert(END, f"Burger \t\t\t{get_quantity(foodItemEntry3)}\t\t\t ${foodItemPrice3} \n")
+
+        # Beauty items
+        if get_quantity(beautyItemEntry1) > 0:
+            items_added = True
+            billText.insert(END, f"Shampoo \t\t\t{get_quantity(beautyItemEntry1)}\t\t\t ${beautyItemPrice1} \n")
+        if get_quantity(beautyItemEntry2) > 0:
+            items_added = True
+            billText.insert(END, f"Lip Stick \t\t\t{get_quantity(beautyItemEntry2)}\t\t\t ${beautyItemPrice2} \n")
+        if get_quantity(beautyItemEntry3) > 0:
+            items_added = True
+            billText.insert(END, f"Nail polish \t\t\t{get_quantity(beautyItemEntry3)}\t\t\t ${beautyItemPrice3} \n")
+
+        # Grocery items
+        if get_quantity(groceryItemEntry1) > 0:
+            items_added = True
+            billText.insert(END, f"Banana \t\t\t{get_quantity(groceryItemEntry1)}\t\t\t ${groceryItemPrice1} \n")
+        if get_quantity(groceryItemEntry2) > 0:
+            items_added = True
+            billText.insert(END, f"Kiwi \t\t\t{get_quantity(groceryItemEntry2)}\t\t\t ${groceryItemPrice2} \n")
+        if get_quantity(groceryItemEntry3) > 0:
+            items_added = True
+            billText.insert(END, f"Oranges \t\t\t{get_quantity(groceryItemEntry3)}\t\t\t ${groceryItemPrice3} \n")
+
+        # Fashion items
+        if get_quantity(fashionItemEntry1) > 0:
+            items_added = True
+            billText.insert(END, f"Shoes \t\t\t{get_quantity(fashionItemEntry1)}\t\t\t ${fashionItemPrice1} \n")
+        if get_quantity(fashionItemEntry2) > 0:
+            items_added = True
+            billText.insert(END, f"Hoodies \t\t\t{get_quantity(fashionItemEntry2)}\t\t\t ${fashionItemPrice2} \n")
+        if get_quantity(fashionItemEntry3) > 0:
+            items_added = True
+            billText.insert(END, f"Coat \t\t\t{get_quantity(fashionItemEntry3)}\t\t\t ${fashionItemPrice3} \n")
+
+       
+        if not items_added:
+            billText.insert(END, "No items selected. Please add items to your order.\n")
+
+        
+        billText.insert(END, "============================================================= \n")
+        billText.insert(END, f"Total Bill: ${total_with_tax:.2f} \n")
+        billText.insert(END, "============================================================= \n")
 
 
 CustomerLabel = LabelFrame(root, text="Customer Details", font=("Arial", 15, 'bold'), bg="#FFC0CB", fg="Black")
