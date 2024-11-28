@@ -1,7 +1,19 @@
 from tkinter import*
 from tkinter import messagebox
-import random
+import random, os
 
+if not os.path.exists('bills'):
+    os.mkdir('bills')
+
+def save_bill():
+    global billNum
+    result= messagebox.askyesno("Confirm", "Do you want to save your bill?")
+    if result:
+        bill_content = billText.get(1.0,END)
+        file = open(f'bills/ {billNum}.txt', 'w')
+        file.write(bill_content)
+        file.close()
+        messagebox.showinfo('Success', f' Bill: {billNum} is saved')
 billNum = random.randint(500, 1000)
 
 root=Tk()
@@ -220,7 +232,7 @@ def bill():
         billText.insert(END, "============================================================= \n")
         billText.insert(END, f"Total Bill: ${total_with_tax:.2f} \n")
         billText.insert(END, "============================================================= \n")
-
+        save_bill()
 
 CustomerLabel = LabelFrame(root, text="Customer Details", font=("Arial", 15, 'bold'), bg="#FFC0CB", fg="Black")
 CustomerLabel.pack()
@@ -313,6 +325,8 @@ totalButton.grid(row=0, column=0, pady=5, padx=10)
 billButton = Button(buttonFrame2, text="Bill", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=bill)
 billButton.grid(row=0, column=1, pady=5, padx=10)
 
+
+
 emailButton = Button(buttonFrame2, text="Email", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=total)
 emailButton.grid(row=0, column=2, pady=5, padx=10)
 
@@ -320,6 +334,6 @@ printButton = Button(buttonFrame2, text="Print", font=("Arial", 13), bg="#FFC0CB
 printButton.grid(row=0, column=3, pady=5, padx=10)
 
 clearButton = Button(buttonFrame2, text="Clear", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=total)
-clearButton.grid(row=0, column=3, pady=5, padx=10)
+clearButton.grid(row=0, column=4, pady=5, padx=10)
 
 root.mainloop()
