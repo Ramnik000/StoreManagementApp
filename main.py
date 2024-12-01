@@ -2,6 +2,18 @@ from tkinter import*
 from tkinter import messagebox
 import random, os
 
+def search_bill():
+    for i in os.listdir('bills/'):
+        if i.split('.')[0] == customeBillNumberEntry.get():
+            f = open(f'bills/{i}', 'r')
+            billText.delete(1.0,END)
+            for data in f:
+                billText.insert(END,data)
+            f.close()
+            break
+    else:
+        messagebox.showerror('Error', 'Invalid Bill Number')
+
 if not os.path.exists('bills'):
     os.mkdir('bills')
 
@@ -10,11 +22,12 @@ def save_bill():
     result= messagebox.askyesno("Confirm", "Do you want to save your bill?")
     if result:
         bill_content = billText.get(1.0,END)
-        file = open(f'bills/ {billNum}.txt', 'w')
+        file = open(f'bills/{billNum}.txt', 'w')
         file.write(bill_content)
         file.close()
         messagebox.showinfo('Success', f' Bill: {billNum} is saved')
 billNum = random.randint(500, 1000)
+
 
 root=Tk()
 root.title('🏪 Store Application')
@@ -254,7 +267,7 @@ customeBillNumber.grid(row=0,column=4, pady=2,padx=10)
 customeBillNumberEntry = Entry(CustomerLabel,font=("Arial", 13))
 customeBillNumberEntry.grid(row=0,column=5)
 
-searchButton = Button(CustomerLabel, text="SEARCH",font=("Arial", 13))
+searchButton = Button(CustomerLabel, text="SEARCH",font=("Arial", 13), command= search_bill)
 searchButton.grid(row=0,column=6,pady=5,padx=10)
 
 ButtonLabel = LabelFrame(root, text="Select your Interest !!", font=("Arial", 15, 'bold'), bg="#FFC0CB", fg="Black")
@@ -324,8 +337,6 @@ totalButton.grid(row=0, column=0, pady=5, padx=10)
 
 billButton = Button(buttonFrame2, text="Bill", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=bill)
 billButton.grid(row=0, column=1, pady=5, padx=10)
-
-
 
 emailButton = Button(buttonFrame2, text="Email", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=total)
 emailButton.grid(row=0, column=2, pady=5, padx=10)
