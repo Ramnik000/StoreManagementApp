@@ -2,6 +2,46 @@ from tkinter import*
 from tkinter import messagebox
 import random, os, tempfile
 
+def clear():
+    foodItemEntry1.insert(0, "0")
+    foodItemEntry2.insert(0, "0")
+    foodItemEntry3.insert(0, "0")
+
+    beautyItemEntry1.insert(0, "0")
+    beautyItemEntry2.insert(0, "0")
+    beautyItemEntry3.insert(0, "0")
+
+    fashionItemEntry1.insert(0, "0")
+    fashionItemEntry2.insert(0, "0")
+    fashionItemEntry3.insert(0, "0")
+
+    groceryItemEntry1.insert(0, "0")
+    groceryItemEntry2.insert(0, "0")
+    groceryItemEntry3.insert(0, "0")
+
+    foodItemEntry1.delete(0, END)
+    foodItemEntry2.delete(0, END)
+    foodItemEntry3.delete(0, END)
+
+    beautyItemEntry1.delete(0, END)
+    beautyItemEntry2.delete(0, END)
+    beautyItemEntry3.delete(0, END)
+
+    fashionItemEntry1.delete(0, END)
+    fashionItemEntry2.delete(0, END)
+    fashionItemEntry3.delete(0, END)
+
+    groceryItemEntry1.delete(0, END)
+    groceryItemEntry2.delete(0, END)
+    groceryItemEntry3.delete(0, END)
+    
+    customerNameEntry.delete(0,END)
+    customerLoyalyCardEntry.delete(0,END)
+    customeBillNumberEntry.delete(0,END)
+
+    billText.delete(1.0, END)
+
+
 def print_bill(): 
     if billText.get(1.0, END) == '\n':
         messagebox.showerror("Error", "Bill is Empty")
@@ -204,46 +244,46 @@ def bill():
         # Food items
         if get_quantity(foodItemEntry1) > 0:
             items_added = True
-            billText.insert(END, f"Momos \t\t\t{get_quantity(foodItemEntry1)}\t\t\t ${foodItemPrice1} \n")
+            billText.insert(END, f"Momos\t\t\t{get_quantity(foodItemEntry1)}\t\t\t ${foodItemPrice1} \n")
         if get_quantity(foodItemEntry2) > 0:
             items_added = True
-            billText.insert(END, f"Pizza \t\t\t{get_quantity(foodItemEntry2)}\t\t\t ${foodItemPrice2} \n")
+            billText.insert(END, f"Pizza\t\t\t{get_quantity(foodItemEntry2)}\t\t\t ${foodItemPrice2} \n")
         if get_quantity(foodItemEntry3) > 0:
             items_added = True
-            billText.insert(END, f"Burger \t\t\t{get_quantity(foodItemEntry3)}\t\t\t ${foodItemPrice3} \n")
+            billText.insert(END, f"Burger\t\t\t{get_quantity(foodItemEntry3)}\t\t\t ${foodItemPrice3} \n")
 
         # Beauty items
         if get_quantity(beautyItemEntry1) > 0:
             items_added = True
-            billText.insert(END, f"Shampoo \t\t\t{get_quantity(beautyItemEntry1)}\t\t\t ${beautyItemPrice1} \n")
+            billText.insert(END, f"Shampoo\t\t\t{get_quantity(beautyItemEntry1)}\t\t\t ${beautyItemPrice1} \n")
         if get_quantity(beautyItemEntry2) > 0:
             items_added = True
-            billText.insert(END, f"Lip Stick \t\t\t{get_quantity(beautyItemEntry2)}\t\t\t ${beautyItemPrice2} \n")
+            billText.insert(END, f"LipStick\t\t\t{get_quantity(beautyItemEntry2)}\t\t\t ${beautyItemPrice2} \n")
         if get_quantity(beautyItemEntry3) > 0:
             items_added = True
-            billText.insert(END, f"Nail polish \t\t\t{get_quantity(beautyItemEntry3)}\t\t\t ${beautyItemPrice3} \n")
+            billText.insert(END, f"NailPolish\t\t\t{get_quantity(beautyItemEntry3)}\t\t\t ${beautyItemPrice3} \n")
 
         # Grocery items
         if get_quantity(groceryItemEntry1) > 0:
             items_added = True
-            billText.insert(END, f"Banana \t\t\t{get_quantity(groceryItemEntry1)}\t\t\t ${groceryItemPrice1} \n")
+            billText.insert(END, f"Banana\t\t\t{get_quantity(groceryItemEntry1)}\t\t\t ${groceryItemPrice1} \n")
         if get_quantity(groceryItemEntry2) > 0:
             items_added = True
-            billText.insert(END, f"Kiwi \t\t\t{get_quantity(groceryItemEntry2)}\t\t\t ${groceryItemPrice2} \n")
+            billText.insert(END, f"Kiwi\t\t\t{get_quantity(groceryItemEntry2)}\t\t\t ${groceryItemPrice2} \n")
         if get_quantity(groceryItemEntry3) > 0:
             items_added = True
-            billText.insert(END, f"Oranges \t\t\t{get_quantity(groceryItemEntry3)}\t\t\t ${groceryItemPrice3} \n")
+            billText.insert(END, f"Oranges\t\t\t{get_quantity(groceryItemEntry3)}\t\t\t ${groceryItemPrice3} \n")
 
         # Fashion items
         if get_quantity(fashionItemEntry1) > 0:
             items_added = True
-            billText.insert(END, f"Shoes \t\t\t{get_quantity(fashionItemEntry1)}\t\t\t ${fashionItemPrice1} \n")
+            billText.insert(END, f"Shoes\t\t\t{get_quantity(fashionItemEntry1)}\t\t\t ${fashionItemPrice1} \n")
         if get_quantity(fashionItemEntry2) > 0:
             items_added = True
-            billText.insert(END, f"Hoodies \t\t\t{get_quantity(fashionItemEntry2)}\t\t\t ${fashionItemPrice2} \n")
+            billText.insert(END, f"Hoodies\t\t\t{get_quantity(fashionItemEntry2)}\t\t\t ${fashionItemPrice2} \n")
         if get_quantity(fashionItemEntry3) > 0:
             items_added = True
-            billText.insert(END, f"Coat \t\t\t{get_quantity(fashionItemEntry3)}\t\t\t ${fashionItemPrice3} \n")
+            billText.insert(END, f"Coat\t\t\t{get_quantity(fashionItemEntry3)}\t\t\t ${fashionItemPrice3} \n")
 
        
         if not items_added:
@@ -352,7 +392,7 @@ emailButton.grid(row=0, column=2, pady=5, padx=10)
 printButton = Button(buttonFrame2, text="Print", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=print_bill)
 printButton.grid(row=0, column=3, pady=5, padx=10)
 
-clearButton = Button(buttonFrame2, text="Clear", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=total)
+clearButton = Button(buttonFrame2, text="Clear", font=("Arial", 13), bg="#FFC0CB", fg="Black", bd=2, command=clear)
 clearButton.grid(row=0, column=4, pady=5, padx=10)
 
 root.mainloop()
