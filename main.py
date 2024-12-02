@@ -3,43 +3,20 @@ from tkinter import messagebox
 import random, os, tempfile
 
 def clear():
-    foodItemEntry1.insert(0, "0")
-    foodItemEntry2.insert(0, "0")
-    foodItemEntry3.insert(0, "0")
+    for entry in [
+        foodItemEntry1, foodItemEntry2, foodItemEntry3,
+        beautyItemEntry1, beautyItemEntry2, beautyItemEntry3,
+        fashionItemEntry1, fashionItemEntry2, fashionItemEntry3,
+        groceryItemEntry1, groceryItemEntry2, groceryItemEntry3
+    ]:
+        entry.delete(0, END) 
+        entry.insert(0, "0")  
 
-    beautyItemEntry1.insert(0, "0")
-    beautyItemEntry2.insert(0, "0")
-    beautyItemEntry3.insert(0, "0")
-
-    fashionItemEntry1.insert(0, "0")
-    fashionItemEntry2.insert(0, "0")
-    fashionItemEntry3.insert(0, "0")
-
-    groceryItemEntry1.insert(0, "0")
-    groceryItemEntry2.insert(0, "0")
-    groceryItemEntry3.insert(0, "0")
-
-    foodItemEntry1.delete(0, END)
-    foodItemEntry2.delete(0, END)
-    foodItemEntry3.delete(0, END)
-
-    beautyItemEntry1.delete(0, END)
-    beautyItemEntry2.delete(0, END)
-    beautyItemEntry3.delete(0, END)
-
-    fashionItemEntry1.delete(0, END)
-    fashionItemEntry2.delete(0, END)
-    fashionItemEntry3.delete(0, END)
-
-    groceryItemEntry1.delete(0, END)
-    groceryItemEntry2.delete(0, END)
-    groceryItemEntry3.delete(0, END)
-    
-    customerNameEntry.delete(0,END)
-    customerLoyalyCardEntry.delete(0,END)
-    customeBillNumberEntry.delete(0,END)
+    for entry in [customerNameEntry, customerLoyalyCardEntry, customeBillNumberEntry]:
+        entry.delete(0, END)
 
     billText.delete(1.0, END)
+
 
 
 def print_bill(): 
