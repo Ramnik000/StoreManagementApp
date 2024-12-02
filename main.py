@@ -3,18 +3,25 @@ from tkinter import messagebox
 import random, os, tempfile
 
 def clear():
+    all_entries = [
+        foodItemEntry1, foodItemEntry2, foodItemEntry3,
+        beautyItemEntry1, beautyItemEntry2, beautyItemEntry3,
+        fashionItemEntry1, fashionItemEntry2, fashionItemEntry3,
+        groceryItemEntry1, groceryItemEntry2, groceryItemEntry3,
+        customerNameEntry, customerLoyalyCardEntry, customeBillNumberEntry,
+        foodTotalEntry, beautyTotalEntry, fashionTotalEntry, 
+        groceryTotalEntry, totalBillEntry
+    ]
+
+    for entry in all_entries:
+        entry.delete(0, END)  
     for entry in [
         foodItemEntry1, foodItemEntry2, foodItemEntry3,
         beautyItemEntry1, beautyItemEntry2, beautyItemEntry3,
         fashionItemEntry1, fashionItemEntry2, fashionItemEntry3,
         groceryItemEntry1, groceryItemEntry2, groceryItemEntry3
     ]:
-        entry.delete(0, END) 
         entry.insert(0, "0")  
-
-    for entry in [customerNameEntry, customerLoyalyCardEntry, customeBillNumberEntry]:
-        entry.delete(0, END)
-
     billText.delete(1.0, END)
 
 
